@@ -39,7 +39,16 @@
 </head>
 
 <body>
+
+    @auth
+    
+    <h1>Bienvenido {{Auth::user()->name}}</h1>
+
+
+    @else
+
     <h1 class="pb-20">TESTEO WEBSITE LARAVEL OMG</h1>
+
 
     <div class="p-10 form-card">
         <h2>Register</h2>
@@ -54,6 +63,9 @@
             <button class="p-10">Register</button>
         </form>
     </div>
+
+    @endauth
+
 </body>
 
 </html>
