@@ -13,23 +13,23 @@
             font-feature-settings: normal
         }
 
-        .p-10{
+        .p-10 {
             padding: 10px;
             font-family: inherit;
             font-size: 16px
         }
 
-        .pb-20{
+        .pb-20 {
             padding-bottom: 20px
         }
 
-        .fixed-form{
+        .fixed-form {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .form-card{
+        .form-card {
             border: 3px solid black;
             max-width: 500px;
             margin: auto;
@@ -45,9 +45,12 @@
         <h2>Register</h2>
         <form action="/register" method="POST" class="fixed-form">
             @csrf
-            <input type="text" name="name" placeholder="name" id="name" autocomplete="name" class="p-10">
-            <input type="email" placeholder="email" type="email" autocomplete="email" name="email" id="email" class="p-10">
-            <input type="password" placeholder="password" type="password" autocomplete="password" name="password" id="password" class="p-10">
+            <input type="text" name="name" placeholder="name" id="name" autocomplete="name" class="p-10"
+                required>
+            <input type="email" placeholder="email" type="email" autocomplete="email" name="email" id="email"
+                class="p-10" required>
+            <input type="password" placeholder="password" type="password" autocomplete="password" name="password"
+                id="password" class="p-10" required>
             <button class="p-10">Register</button>
         </form>
     </div>
