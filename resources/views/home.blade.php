@@ -43,7 +43,8 @@
 
     <div class="p-10 form-card">
         <h2>Register</h2>
-        <form action="" class="fixed-form">
+        <form action="/register" method="POST" class="fixed-form">
+            @csrf
             <input type="text" name="name" placeholder="name" id="name" autocomplete="name" class="p-10">
             <input type="email" placeholder="email" type="email" autocomplete="email" name="email" id="email" class="p-10">
             <input type="password" placeholder="password" type="password" autocomplete="password" name="password" id="password" class="p-10">
