@@ -18,4 +18,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+
+Route::post('/logout',[UserController::class, 'logout']);
+
 Route::post('/register', [UserController::class, 'register']);
