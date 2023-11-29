@@ -35,6 +35,7 @@
             margin: auto;
             border-radius: 12px
         }
+
     </style>
 </head>
 
@@ -48,6 +49,17 @@
         @csrf
         <button class="p-10"> log out </button>
     </form>
+
+    <div class="form-card p-10">
+        <h2>Create a new post</h2>
+        <form action="/create-post" method="POST" class="fixed-form">
+            @csrf
+
+            <input type="text" name="title" placeholder="Title of your post" class="p-10">
+            <textarea name="body" placeholder="Write your thoughts here..." rows="10" class="p-10" style="font-family: inherit; font-size: 16px"></textarea>
+            <button class="p-10">publish</button>
+        </form>
+    </div>
 
     @else
 

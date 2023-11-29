@@ -9,34 +9,38 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $incomingFields = $request->validate([
-            'loginame' => "required",
+            'loginname' => "required",
             'loginpassword' => "required"
         ]);
 
-        if(auth() -> attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])){
-            $request -> session()->regenerate();
+        if (auth()->attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])) {
+            $request->session()->regenerate();
         }
+
+        return redirect('/'); 
     }
 
-    public function logout(){
-        auth() -> logout();
+    public function logout()
+    {
+        auth()->logout();
         return redirect('/');
     }
 
     public function register(Request $request)
     {
         $incomingFields = $request->validate([
-            'name' => ['required', 'min:3','max:100', Rule::unique('users','name')],
-            'email' => ['required','email', Rule::unique('users','email')],
-            'password' => ['required','min:8','max:100'],
+            'name' => ['required', 'min:3', 'max:100', Rule::unique('users', 'name')],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:8', 'max:100'],
         ]);
 
         $incomingFields['password'] = bcrypt($incomingFields['password']);
         $user = User::create($incomingFields);
 
-        auth() -> login($user);
+        auth()->login($user);
 
         return redirect('/');
     }
