@@ -8,11 +8,36 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function showEditScreen(Post $post){
-        return view('edit-post',['post' => $post]);
+    public function showEditScreen(Post $post)
+    {
+
+        if (auth()->user()->id !== $post['user_id']) {
+            return redirect('/');
+        } else {
+            return view('edit-post', ['post' => $post]);
+        }
     }
 
-    public function createPost(Request $request){
+    public function actuallyUpdatePost(Post $post, Request $request)
+    {
+        if (auth()->user()->id !== $post['user_id']) {
+            return redirect('/');
+        }
+
+        $incomingFields = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+        $post->update($incomingFields);
+        return redirect('/');
+    }
+
+    public function createPost(Request $request)
+    {
         $incomingFieds = $request->validate([
             'title' => 'required',
             'body' => 'required',
