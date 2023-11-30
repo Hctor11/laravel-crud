@@ -36,12 +36,18 @@
             border-radius: 12px
         }
 
-        .post-card{
+        .post-card {
             border: 3px solid black;
             max-width: 500px;
-            margin: 12px auto ;
+            margin: 12px auto;
             border-radius: 12px;
             padding: 12px
+        }
+
+        .actions {
+            display: flex;
+            justify-content: left;
+            gap: 24px
         }
     </style>
 </head>
@@ -76,7 +82,14 @@
                 <div class="post-card p-10">
                     <h2>{{ $post->title }}</h2>
                     <p>{{ $post->body }}</p>
-                    <a href="/edit-post/{{$post->id}}">edit post</a>
+                    <div class="actions">
+                        <form action="/delete-post/{{ $post->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="p-10">DELETE</button>
+                        </form>
+                        <a href="/edit-post/{{ $post->id }}">edit post</a>
+                    </div>
                 </div>
             @endforeach
         </div>
