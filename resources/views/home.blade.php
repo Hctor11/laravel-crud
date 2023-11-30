@@ -36,51 +36,69 @@
             border-radius: 12px
         }
 
+        .post-card{
+            border: 3px solid black;
+            max-width: 500px;
+            margin: 12px auto ;
+            border-radius: 12px;
+            padding: 12px
+        }
     </style>
 </head>
 
 <body>
 
     @auth
-    
-    <h1>Bienvenido {{Auth::user()->name}}</h1>
 
-    <form action="/logout" method="POST">
-        @csrf
-        <button class="p-10"> log out </button>
-    </form>
+        <h1>Bienvenido {{ Auth::user()->name }}</h1>
 
-    <div class="form-card p-10">
-        <h2>Create a new post</h2>
-        <form action="/create-post" method="POST" class="fixed-form">
+        <form action="/logout" method="POST">
             @csrf
-
-            <input type="text" name="title" placeholder="Title of your post" class="p-10">
-            <textarea name="body" placeholder="Write your thoughts here..." rows="10" class="p-10" style="font-family: inherit; font-size: 16px"></textarea>
-            <button class="p-10">publish</button>
+            <button class="p-10"> log out </button>
         </form>
-    </div>
 
+        <div class="form-card p-10">
+            <h2>Create a new post</h2>
+            <form action="/create-post" method="POST" class="fixed-form">
+                @csrf
+
+                <input type="text" name="title" placeholder="Title of your post" class="p-10">
+                <textarea name="body" placeholder="Write your thoughts here..." rows="10" class="p-10"
+                    style="font-family: inherit; font-size: 16px"></textarea>
+                <button class="p-10">publish</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="p-10">
+            @foreach ($posts as $post)
+                <div class="post-card p-10">
+                    <h2>{{ $post->title }}</h2>
+                    <p>{{ $post->body }}</p>
+                    <a href="/edit-post/{{$post->id}}">edit post</a>
+                </div>
+            @endforeach
+        </div>
     @else
+        <h1 class="pb-20">TESTEO WEBSITE LARAVEL OMG</h1>
 
-    <h1 class="pb-20">TESTEO WEBSITE LARAVEL OMG</h1>
+        <div class="p-10 form-card">
+            <h2>Register</h2>
+            <form action="/register" method="POST" class="fixed-form">
+                @csrf
+                <input type="text" name="name" placeholder="name" id="name" autocomplete="name" class="p-10"
+                    required>
+                <input type="email" placeholder="email" type="email" autocomplete="email" name="email" id="email"
+                    class="p-10" required>
+                <input type="password" placeholder="password" type="password" autocomplete="password" name="password"
+                    id="password" class="p-10" required>
+                <button class="p-10">Register</button>
+            </form>
 
-    <div class="p-10 form-card">
-        <h2>Register</h2>
-        <form action="/register" method="POST" class="fixed-form">
-            @csrf
-            <input type="text" name="name" placeholder="name" id="name" autocomplete="name" class="p-10"
-                required>
-            <input type="email" placeholder="email" type="email" autocomplete="email" name="email" id="email"
-                class="p-10" required>
-            <input type="password" placeholder="password" type="password" autocomplete="password" name="password"
-                id="password" class="p-10" required>
-            <button class="p-10">Register</button>
-        </form>
+            <a href="/login">already have an account? log in!</a>
 
-        <a href="/login">already have an account? log in!</a>
-
-    </div>
+        </div>
 
     @endauth
 

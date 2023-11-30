@@ -18,5 +18,7 @@ class PostController extends Controller
         $incomingFieds['user_id'] = auth()->id();
 
         post::create($incomingFieds);
+
+        return redirect('/');
     }
 }

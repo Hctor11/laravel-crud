@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -16,7 +17,15 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+
+    $posts = [];
+
+    if(auth() -> check()){
+        $posts = auth()->user()->userCoolPosts()->latest()->get();
+    }
+
+    // $posts = post::where('user_id',auth()->id())->get();
+    return view('home', ['posts' => $posts]);
 });
 
 Route::get('/login', function () {
