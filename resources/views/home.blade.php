@@ -80,7 +80,7 @@
         <div class="p-10">
             @foreach ($posts as $post)
                 <div class="post-card p-10">
-                    <h2>{{ $post->title }}</h2>
+                    <h2>{{ $post->title }} by {{$post->user->name}}</h2>
                     <p>{{ $post->body }}</p>
                     <div class="actions">
                         <form action="/delete-post/{{ $post->id }}" method="POST">

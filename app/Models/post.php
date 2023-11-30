@@ -14,4 +14,8 @@ class post extends Model
         'body',
         'user_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id'); // this is a relationship, its like a inner join
+    }
 }
